@@ -4,3 +4,27 @@
 .abc{
     font-size: 49px;
 }
+.filmIndex{
+    margin-bottom: 1em;
+}
+.changePage{
+    background-color: darksalmon;
+    display: block;
+    text-align: center;
+}
+
+.page{
+    text-align: center;
+    margin: 1em;
+}
+
+.showDetail{
+
+    margin-top: 3em;
+    color:white;
+    border-radius: 5px;
+    width: 10em;
+    height: 3em;
+    text-align: center;
+    background-color: slateblue;
+}
