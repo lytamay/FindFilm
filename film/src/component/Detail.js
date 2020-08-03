@@ -1,10 +1,11 @@
 import React from 'react';
 import Navbar from './head/Navbar';
+import ShowDetail from './head/ShowDetail';
 function Detail(props) {
+    
     return (
         <div>
-            <Navbar/>
-            
+            <ShowDetail id = {props.match.params.name}/> 
         </div>
     );
 }

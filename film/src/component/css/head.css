@@ -7,7 +7,7 @@
 .filmIndex{
     margin-bottom: 1em;
 }
-.changePage{
+.Page{
     background-color: darksalmon;
     display: block;
     text-align: center;
@@ -27,4 +27,20 @@
     height: 3em;
     text-align: center;
     background-color: slateblue;
+}
+.XemPhim{
+    background-color: brown;
+    margin-left: 40%;
+    margin-top:50%;
+    border: 1px;
+    padding: 10px;
+}
+.backGroundDetail{
+    background-color: #1f262a;
+}
+.text{
+    color:white;
+}
+a:hover{
+    text-decoration: none;
 }

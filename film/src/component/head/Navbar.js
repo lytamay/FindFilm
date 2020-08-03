@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '.././css/head.css';
 import '../css/head.css'
-import { BrowserRouter as Router} from "react-router-dom";
 
 function Navbar(props) {
+  const [searchValue, setSearchValue] = useState("")
+  const [buttonSearch, setButtonSearch] = useState("");
+  
+  const onHandelChange = (e)=>{  
+    setSearchValue(e.target.value)
+  }
+
+  const onClickSearch = (e) => {
+    e.preventDefault();
+     props.onChange(searchValue)
+      setButtonSearch(searchValue);
+      return buttonSearch;
+  }
+
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,8 +33,8 @@ function Navbar(props) {
             </li>
           </ul>
           <form className="form-inline my-2 my-lg-0">
-            <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <input value = {searchValue} onChange = {onHandelChange} className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+            <button onClick = {onClickSearch} className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
         </div>
       </nav>

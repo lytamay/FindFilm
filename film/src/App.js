@@ -9,12 +9,14 @@ function App() {
     <div>
       <Router>
         <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/detail">
-            <Detail/>
-          </Route>
+          <Route exact path="/"
+          render={props=><Home {...props} />
+        }/>
+          <Route path='/film/:name'
+          render={props=><Detail {...props} />
+          }
+          >
+            </Route>
         </Switch>
       </Router>
     </div>

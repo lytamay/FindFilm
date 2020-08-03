@@ -1,23 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../css/head.css';
-import { Link } from 'react-router-dom';
 
 function ListFilm(props) {
     const [films , setFilms] = useState([]);
-
+    const [numberPage , setNumberPage] = useState();
+    const defaultPage = 5;
+    const length = films.length
+    if (numberPage!==Math.round(length/5))
+    setNumberPage (Math.round(length/5))
+    
+    const link = 'http://www.omdbapi.com/?apikey=c867a671&s=' + props.textSearch
      useEffect(()=>{
-         axios.get('http://www.omdbapi.com/?apikey=c867a671&s=star&page=3')
+         axios.get(link)
          .then((res)=>{
-             const danhSachFilmTuDuLieu = res.data.Search;
-             setFilms(danhSachFilmTuDuLieu)
+             if (res.data.Response==='False') {
+                const link1 = 'http://www.omdbapi.com/?apikey=c867a671&t=' + props.textSearch
+                axios.get(link1)
+                .then((res)=>{
+                    const danhSachFilmTuDuLieu = res.data;
+                    let search = []
+                    search.push(danhSachFilmTuDuLieu)
+                    setFilms(search)
+                })
+                .catch(err => alert(err))
+            } else {
+                const danhSachFilmTuDuLieu = res.data.Search;
+                setFilms(danhSachFilmTuDuLieu)
+            }
+             
          })
-     },[])
+         .catch(error => alert(error));
+     },[props.textSearch])
 
      const showList = (film) => {
          return (  
-             <Link Link = {film.imdbID}>
-             <div className = "container-fuild">
+             <div key = {films.imdbID} className = "container-fuild">
                  <div>
                     <h1 style ={{color : "#FF8000"}}>{film.Title}</h1>
                  </div>
@@ -25,7 +43,7 @@ function ListFilm(props) {
                     <p className = "display-5">{film.Year}</p>
                  </div>
                  <div>
-                    <p>{film.Type}</p>
+                    <p>{film.Title}</p>
                  </div>
                  <div className = "Poster"> 
                     <p>{film.Poster}</p>
@@ -34,11 +52,12 @@ function ListFilm(props) {
                      <button  className = "showDetail" >Show Detail</button>
                  </div>
              </div>
-             </Link>
          )
      }
      const filmIndex =(film)=>{
+        let link=`/film/${film.imdbID}`
          return(
+             <a key={link} href = {link}>
              <div className = "container-fluid filmIndex">
                  <div className = "row">
                     <div className = "col-sm-3">
@@ -48,35 +67,44 @@ function ListFilm(props) {
                     </div>
                     <div className = "col-sm-9" style={{overflowWrap: 'break-word'}}>
                         <div>
-                            <p>{showList(film)}</p> 
+                            {showList(film)}
                         </div>
                     </div>
                  </div>
              </div>
+             </a>
          )
      }  
 
      const showListFilm = () => {
-         const Show = films.map((film) =>{
-             return (
-                 <div>
-                     {filmIndex(film)}
-                 </div>
-             )
+         let crpage=props.location.hash
+         crpage=crpage.slice(1)
+         const Show = films.map((film,index) =>{
+             if((index>=(crpage-1)*5) && (index<5*crpage)){
+                       return (
+                    <div key={index}>{filmIndex(film)} </div>
+                )
+             }
          })
          return Show;
      }
-     const changePage = () =>{
-         const page  = [1,2,3];
+     const Page = () =>{
+        const page  = [];
+        for(let i =1 ; i<= numberPage ;i++){
+            page.push(i)
+        }
+        console.log('aasasa' + films.length)
          const listPage = page.map(index =>{
-                return <a className = "page" href = "#">{index}</a>
+                let a=`#${index}`
+                return <a key={index} className = "page" href = {a}>{index}</a>
             })
          return  listPage
      }
+     
     return (
         <div className = "container-fluid">
             {showListFilm()}
-            <div className = "changePage">{changePage()}</div>
+            <div className = "Page">{Page()}</div>
         </div>
     );
 }
