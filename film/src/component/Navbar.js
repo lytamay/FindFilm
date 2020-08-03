@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '.././css/head.css';
-import '../css/head.css'
+
 
 function Navbar(props) {
   const [searchValue, setSearchValue] = useState("")
@@ -23,7 +23,7 @@ function Navbar(props) {
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-          <a className="navbar-brand" href="#">Phimhay.com</a>
+          <a className="navbar-brand" href="https://google.com">Phimhay.com</a>
           <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
             <li className="nav-item active">
               <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>

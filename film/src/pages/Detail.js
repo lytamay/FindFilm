@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from './head/Navbar';
-import ShowDetail from './head/ShowDetail';
+import ShowDetail from '../component/ShowDetail';
+
 function Detail(props) {
     
     return (

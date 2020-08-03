@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Navbar from './head/Navbar';
-import Content from './head/Content';
-import ListFilm from './head/ListFilm';
+import Navbar from '../component/Navbar';
+import Content from '../component/Content';
+import ListFilm from '../component/ListFilm';
 function Home(props) {
     const [textSearch, setTextSearch] = useState('star')
 

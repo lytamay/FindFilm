@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 
 
 function ShowDetail(props) {
@@ -21,7 +21,7 @@ function ShowDetail(props) {
             <div className = "container text">
                 <div className = "row">
                     <div className = "col-md-6">
-                        <img src = {detail.Poster}  ></img>    
+                        <img src = {detail.Poster} alt="img" />    
                     </div>
                     <div className = "col-md-6">
                         <div>
@@ -37,7 +37,7 @@ function ShowDetail(props) {
                             <p>Cac dien vien: {detail.Actors}</p>
                         </div>
                         <div>
-                            <a className = "XemPhim">Xem Phim</a>
+                            <a className = "XemPhim" >Xem Phim</a>
                         </div>
                     </div>
                 </div>

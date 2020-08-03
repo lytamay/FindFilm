@@ -5,7 +5,8 @@ import '../css/head.css';
 function ListFilm(props) {
     const [films , setFilms] = useState([]);
     const [numberPage , setNumberPage] = useState();
-    const defaultPage = 5;
+    const [favourite , setFavourite] = useState('false')
+
     const length = films.length
     if (numberPage!==Math.round(length/5))
     setNumberPage (Math.round(length/5))
@@ -22,6 +23,7 @@ function ListFilm(props) {
                     let search = []
                     search.push(danhSachFilmTuDuLieu)
                     setFilms(search)
+
                 })
                 .catch(err => alert(err))
             } else {
@@ -36,8 +38,10 @@ function ListFilm(props) {
      const showList = (film) => {
          return (  
              <div key = {films.imdbID} className = "container-fuild">
-                 <div>
+                 <div className = 'row'>
                     <h1 style ={{color : "#FF8000"}}>{film.Title}</h1>
+                     <img className = 'heart' src = " https://image.flaticon.com/icons/svg/148/148836.svg"/>
+                     {/* <span className="glyphicon glyphicon-envelope"></span> */}
                  </div>
                  <div>
                     <p className = "display-5">{film.Year}</p>
@@ -54,6 +58,13 @@ function ListFilm(props) {
              </div>
          )
      }
+
+     const handelChange = () =>{
+         setFavourite("true");
+     }
+     
+
+
      const filmIndex =(film)=>{
         let link=`/film/${film.imdbID}`
          return(
@@ -93,7 +104,7 @@ function ListFilm(props) {
         for(let i =1 ; i<= numberPage ;i++){
             page.push(i)
         }
-        console.log('aasasa' + films.length)
+
          const listPage = page.map(index =>{
                 let a=`#${index}`
                 return <a key={index} className = "page" href = {a}>{index}</a>

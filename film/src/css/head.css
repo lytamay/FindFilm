@@ -44,3 +44,10 @@
 a:hover{
     text-decoration: none;
 }
+
+.heart{
+    font-size: small;
+    width: 4%;
+    height: 4%;
+    margin-left: 17em;
+}
