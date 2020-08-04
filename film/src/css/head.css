@@ -44,10 +44,13 @@
 a:hover{
     text-decoration: none;
 }
+.boxBook{
+    border: whitesmoke;
+    /* background: #1f262a; */
+    color: white;
+}
 
-.heart{
-    font-size: small;
-    width: 4%;
-    height: 4%;
-    margin-left: 17em;
+.boxItem{
+    background: #1f262a;
+    margin: 10px;
 }

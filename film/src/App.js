@@ -3,6 +3,7 @@ import './App.css';
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Detail from './pages/Detail';
+import BookMark from './pages/BookMark'
 
 function App() {
   return (
@@ -14,9 +15,10 @@ function App() {
         }/>
           <Route path='/film/:name'
           render={props=><Detail {...props} />
-          }
-          >
-            </Route>
+          }></Route>
+          <Route path = '/bookmark'>
+            <BookMark/>
+          </Route>  
         </Switch>
       </Router>
     </div>

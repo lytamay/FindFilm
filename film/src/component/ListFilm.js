@@ -23,25 +23,37 @@ function ListFilm(props) {
                     let search = []
                     search.push(danhSachFilmTuDuLieu)
                     setFilms(search)
-
                 })
                 .catch(err => alert(err))
             } else {
                 const danhSachFilmTuDuLieu = res.data.Search;
                 setFilms(danhSachFilmTuDuLieu)
-            }
-             
+            }    
          })
          .catch(error => alert(error));
      },[props.textSearch])
 
      const showList = (film) => {
-         return (  
-             <div key = {films.imdbID} className = "container-fuild">
+        let bookLocal=JSON.parse(localStorage.getItem('book'));
+        if(bookLocal === null) bookLocal=[]
+        // const style =  favourite ? "red" : "#FF8000"
+        // const style= bookLocal.findIndex(value=>value.imdbID===film.imdbID)===-1? 'blue':'red'
+        if(bookLocal.findIndex(value=> value.imdbID === film.imdbID)=== -1){
+            setFavourite("false")
+        }
+        else (
+            setFavourite("true")
+        )
+        const style =  favourite ? "red" : "#FF8000"
+        return (  
+             <div key = {film.imdbID} className = "container-fuild">
                  <div className = 'row'>
-                    <h1 style ={{color : "#FF8000"}}>{film.Title}</h1>
-                     <img className = 'heart' src = " https://image.flaticon.com/icons/svg/148/148836.svg"/>
-                     {/* <span className="glyphicon glyphicon-envelope"></span> */}
+                     <div className ="col-10">
+                        <h3 style ={{color : "#FF8000"}}>{film.Title}</h3>
+                     </div>
+                      <div className = "col-2">
+                        <span onClick = {()=>storeFilmBookMark(film)} style = {{color : style}} className = "fas fa-heart"></span>
+                      </div>            
                  </div>
                  <div>
                     <p className = "display-5">{film.Year}</p>
@@ -55,20 +67,28 @@ function ListFilm(props) {
                  <div >
                      <button  className = "showDetail" >Show Detail</button>
                  </div>
-             </div>
+            </div>
          )
      }
 
-     const handelChange = () =>{
-         setFavourite("true");
+     const storeFilmBookMark = (film) => {
+        const bookLocal = JSON.parse(localStorage.getItem('book')) || []
+        if (bookLocal.findIndex(value=>value.imdbID===film.imdbID)===-1){
+            bookLocal.push(film)
+            setFavourite("true")
+        } else {
+            bookLocal.splice(bookLocal.findIndex(value=>value.imdbID===film.imdbID),1)
+            setFavourite("false")
+        }
+        localStorage.setItem('book',JSON.stringify(bookLocal))
+        //   window.location.reload()
      }
-     
 
 
      const filmIndex =(film)=>{
         let link=`/film/${film.imdbID}`
          return(
-             <a key={link} href = {link}>
+             <a key={link} >
              <div className = "container-fluid filmIndex">
                  <div className = "row">
                     <div className = "col-sm-3">
@@ -92,14 +112,15 @@ function ListFilm(props) {
          crpage=crpage.slice(1)
          const Show = films.map((film,index) =>{
              if((index>=(crpage-1)*5) && (index<5*crpage)){
-                       return (
+                return (
                     <div key={index}>{filmIndex(film)} </div>
                 )
              }
          })
          return Show;
-     }
-     const Page = () =>{
+    }
+
+    const Page = () =>{
         const page  = [];
         for(let i =1 ; i<= numberPage ;i++){
             page.push(i)

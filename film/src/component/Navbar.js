@@ -31,6 +31,9 @@ function Navbar(props) {
             <li className="nav-item">
               <a className="nav-link" href="/detail">Detail</a>
             </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/bookmark">BookMark</a>
+            </li>
           </ul>
           <form className="form-inline my-2 my-lg-0">
             <input value = {searchValue} onChange = {onHandelChange} className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
