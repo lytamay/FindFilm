@@ -8,10 +8,11 @@ function Home(props) {
     const onChange = (text)=>{
          setTextSearch(text)
     }
+    const   Title = "THAO SUC VOI PHIMHAY.COM"
     return (
         <div>
             <Navbar  onChange ={onChange}/>
-            <Content/>
+            <Content Title = {Title}/>
             <ListFilm key='asadad' {...props} textSearch = {textSearch}/>     
         </div>
     );

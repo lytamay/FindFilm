@@ -54,3 +54,8 @@ a:hover{
     background: #1f262a;
     margin: 10px;
 }
+.contents{
+    color : white; 
+    text-align: center;
+    background-color: #1f262a;
+}

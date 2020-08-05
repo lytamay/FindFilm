@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import Content from '../component/Content';
+import Pages from '../component/common/Pages';
+import ShowFilm from '../component/common/ShowFilm';
 
 function BookMark(props) {
     const [bookLocalStorage , setBookLocalStorage] = useState(JSON.parse
@@ -16,7 +19,7 @@ function BookMark(props) {
         }
         else{
             return (
-                <h1>Danh sach phim yeu thich trong</h1>
+                <h1>Danh sach trong</h1>
             )
         }
     }
@@ -40,21 +43,12 @@ function BookMark(props) {
             </div>
         )
     }
-    const navbar = () => {
-        return(
-            <div className = "container">
-                <div className = 'row ' >
-                    <div className = "jumbotron col-12" style = {{background: '#1f262a'}}>
-                        <h2 style = {{ color : 'white', textAlign: 'center'}}>Danh sach phim yeu thich cua ban</h2>
-                    </div>
-                </div>
-            </div>
-        )
-    }
+    
     return (
         <div>
-            {navbar()}
-            {listBookMark()}
+            <Content Title = "Danh sach phim yeu thich cua ban" />
+            <ShowFilm key = '2' films = {bookLocalStorage} {...props}/>
+            {/* <Pages films = {bookLocalStorage}/> */}
         </div>
     );
 }
