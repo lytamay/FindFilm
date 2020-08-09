@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../css/head.css';
 import ShowFilm from './common/ShowFilm.jsx';
 import Pages from './common/Pages';
+import {getFilmBySearch, getFilmByTitle} from '../API/fetchApi.js'
 
 function ListFilm(props) {
     const [films , setFilms] = useState([]);
@@ -13,13 +14,11 @@ function ListFilm(props) {
     if (numberPage!= Math.round(length/5))
     setNumberPage (Math.round(length/5))
     
-    const link = 'http://www.omdbapi.com/?apikey=c867a671&s=' + props.textSearch
      useEffect(()=>{
-         axios.get(link)
-         .then((res)=>{
+        getFilmBySearch(props.textSearch)
+        .then((res)=>{
              if (res.data.Response==='False') {
-                const link1 = 'http://www.omdbapi.com/?apikey=c867a671&t=' + props.textSearch
-                axios.get(link1)
+                getFilmByTitle(props.textSearch)
                 .then((res)=>{
                     const danhSachFilmTuDuLieu = res.data;
                     let search = []

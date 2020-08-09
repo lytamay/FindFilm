@@ -4,9 +4,10 @@ import FilmItem from './FilmItem';
 function ShowFilm(props) {
     
     let films = props.films
-
+     console.log(props)
     const showListFilm = () => {
         let crpage=props.location.hash
+        console.log(props)
         if(crpage != null){
             crpage=crpage.slice(1)
         }  

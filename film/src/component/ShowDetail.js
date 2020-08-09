@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-
+import {getFilmById} from '../API/fetchApi';
 function ShowDetail(props) {
     const [detail, setDetail] = useState({});
 
-    const Id = props.id
-    const link = 'http://www.omdbapi.com/?apikey=c867a671&i=' + Id 
-        useEffect( () =>{
-        axios.get(link)
-         .then((res)=>{
+    useEffect( () =>{
+        getFilmById(props.id)
+        .then((res)=>{
             const danhSachFilmTuDuLieu = res.data;
             setDetail(danhSachFilmTuDuLieu)
-         })
-         .catch(error => console.log(error));
+        })
+        .catch(error => console.log(error));
     },[])
     const Detail = () => {
         return (

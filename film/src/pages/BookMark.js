@@ -43,12 +43,13 @@ function BookMark(props) {
             </div>
         )
     }
-    
+    console.log(props.location.hash)
     return (
         <div>
             <Content Title = "Danh sach phim yeu thich cua ban" />
-            <ShowFilm key = '2' films = {bookLocalStorage} {...props}/>
-            {/* <Pages films = {bookLocalStorage}/> */}
+            {/* <ShowFilm films = {bookLocalStorage} key='a' {...props} /> */}
+            {listBookMark()}
+            <Pages films = {bookLocalStorage}/>
         </div>
     );
 }
